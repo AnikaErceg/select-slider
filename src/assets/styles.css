@@ -15,6 +15,9 @@ body {
     width: 37.5rem;
     border-radius: 6px;
     padding: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 /* styles for initial view of select */
@@ -49,6 +52,10 @@ body {
     font-size: 1rem;
     color: #474747;
 }
+.select-wrapper {
+    width: 100%;
+}
+
 .select-box {
     height: 80px;
 }

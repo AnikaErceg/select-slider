@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="select-wrapper">
     <div v-show="showTitleCard" class="initial-view clickable" @click="onSelectEdit">
       <div class="title">{{selected}}</div>
       <div class="bottom">
