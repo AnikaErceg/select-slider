@@ -1,9 +1,7 @@
-/* 
-
-    accent: #de1a1a // red
-    bg: #e8ebf7 // ghost white
-
-*/
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #474747;
+}
 
 .container {
     margin-top: 100px;
@@ -15,5 +13,39 @@
     padding: 2rem;
     background-color: #e8ebf7;
     width: 37.5rem;
-    border-radius: 2px;
+    border-radius: 6px;
+}
+
+/* styles for initial view of select */
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.initial-view {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    padding: 12px;
+    background-color: #fff;
+    border-radius: 6px;
+    border-left: 6px solid #EF767A;
+    box-shadow: 0 0 12px 0 #bbb;
+}
+.initial-view .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.initial-view .subtitle {
+    font-size: 1.2rem;
+}
+.initial-view .bottom {
+    display: flex;
+    justify-content: space-between;
+}
+.initial-view button {
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+    color: #474747;
 }

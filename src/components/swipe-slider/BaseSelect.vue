@@ -18,6 +18,12 @@ export default {
       type: String,
       default: "swipe-select"
     },
+    topText: {
+      type: String
+    },
+    bottomText: {
+      type: String
+    },
     elements: {
       type: Array
     },

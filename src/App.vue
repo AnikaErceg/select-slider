@@ -10,6 +10,15 @@
       <div>
         Selected: {{selected}}
       </div>
+
+      <div class="initial-view clickable" @click="onSelectEdit">
+        <div class="title">{{selected}}</div>
+        <div class="bottom">
+          <div class="subtitle">€/Month</div>
+          <button type="button">Edit</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -24,16 +33,26 @@ export default {
   data() {
     return {
       elements: [
-        "one",
-        "two",
-        "three"
+        "36",
+        "40",
+        "45",
+        "50",
+        "55",
+        "60",
+        "70",
+        "75",
+        "80",
+        "434"
       ],
-      selected: "two",
+      selected: "50",
     }
   },
   methods: {
     onSelect(selected) {
       this.selected = selected
+    },
+    onSelectEdit() {
+      console.log("editing...")
     }
   }
 };
