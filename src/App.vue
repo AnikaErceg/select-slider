@@ -7,16 +7,8 @@
         :default="selected"
         @select="onSelect"
       ></base-select>
-      <div>
+      <div class="test-display">
         Selected: {{selected}}
-      </div>
-
-      <div class="initial-view clickable" @click="onSelectEdit">
-        <div class="title">{{selected}}</div>
-        <div class="bottom">
-          <div class="subtitle">€/Month</div>
-          <button type="button">Edit</button>
-        </div>
       </div>
 
     </div>
@@ -51,11 +43,14 @@ export default {
     onSelect(selected) {
       this.selected = selected
     },
-    onSelectEdit() {
-      console.log("editing...")
-    }
   }
 };
 </script>
+
+<style scoped>
+  .test-display {
+    margin: 2rem; 
+  }
+</style>
 
 <style src="./assets/styles.css">

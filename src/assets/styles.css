@@ -14,6 +14,7 @@ body {
     background-color: #e8ebf7;
     width: 37.5rem;
     border-radius: 6px;
+    padding: 2rem;
 }
 
 /* styles for initial view of select */
@@ -25,7 +26,6 @@ body {
 .initial-view {
     display: flex;
     flex-direction: column;
-    margin: 2rem;
     padding: 12px;
     background-color: #fff;
     border-radius: 6px;
@@ -48,4 +48,7 @@ body {
     border: none;
     font-size: 1rem;
     color: #474747;
+}
+.select-box {
+    height: 80px;
 }
