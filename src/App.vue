@@ -1,6 +1,14 @@
 <template>
   <div id="app">
-    <base-test></base-test>
+    <base-test
+      name="select-one"
+      :elements="elements"
+      :default="selected"
+      @select="onSelect"
+    ></base-test>
+    <div>
+      Selected: {{selected}}
+    </div>
   </div>
 </template>
 
@@ -10,6 +18,21 @@ export default {
   name: "App",
   components: {
     BaseTest
+  },
+  data() {
+    return {
+      elements: [
+        "one",
+        "two",
+        "three"
+      ],
+      selected: "two",
+    }
+  },
+  methods: {
+    onSelect(selected) {
+      this.selected = selected
+    }
   }
 };
 </script>
