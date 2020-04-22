@@ -1,23 +1,25 @@
 <template>
-  <div id="app">
-    <base-test
-      name="select-one"
-      :elements="elements"
-      :default="selected"
-      @select="onSelect"
-    ></base-test>
-    <div>
-      Selected: {{selected}}
+  <div class="container">
+    <div id="app" class="demo-box">
+      <base-select
+        name="select-one"
+        :elements="elements"
+        :default="selected"
+        @select="onSelect"
+      ></base-select>
+      <div>
+        Selected: {{selected}}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import BaseTest from "./components/swipe-slider/BaseTest.vue"
+import BaseSelect from "./components/swipe-slider/BaseSelect.vue"
 export default {
   name: "App",
   components: {
-    BaseTest
+    BaseSelect
   },
   data() {
     return {
@@ -36,3 +38,5 @@ export default {
   }
 };
 </script>
+
+<style src="./assets/styles.css">

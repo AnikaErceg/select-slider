@@ -1,0 +1,19 @@
+/* 
+
+    accent: #de1a1a // red
+    bg: #e8ebf7 // ghost white
+
+*/
+
+.container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.demo-box {
+    padding: 2rem;
+    background-color: #e8ebf7;
+    width: 37.5rem;
+    border-radius: 2px;
+}

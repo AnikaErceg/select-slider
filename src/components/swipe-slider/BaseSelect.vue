@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "base-test",
+  name: "base-select",
   props: {
     name: {
       type: String,
