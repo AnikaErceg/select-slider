@@ -6,6 +6,8 @@
         :elements="elements"
         :default="selected"
         @select="onSelect"
+        top-text="Selected value"
+        bottom-text="€/Month"
       ></base-select>
       <div class="test-display">
         Selected: {{selected}}

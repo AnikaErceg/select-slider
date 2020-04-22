@@ -59,3 +59,16 @@ body {
 .select-box {
     height: 80px;
 }
+
+/* styles for select swap */
+
+.select-wrapper .bottom-text {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.select-wrapper .top-text {
+    font-size: .875rem;
+    text-align: center;
+}
