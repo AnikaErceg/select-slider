@@ -28,4 +28,4 @@ pass default element
 
 - native select support
 
-- arguments for and against these kind of sliders for this situation
+- arguments for and against these kind of sliders for certain situations
