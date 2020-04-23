@@ -80,6 +80,7 @@ body {
 }
 .select-options .options {
     display: flex;
+    transition-timing-function: ease-out;
 }
 .select-options .center-options {
     overflow: hidden;
