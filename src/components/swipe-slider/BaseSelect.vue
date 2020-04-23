@@ -3,7 +3,7 @@
     <select :name="name" v-model="selected" @change="onSelect">
       <option v-for="element in elements" :key="element">{{ element }}</option>
     </select>
-    <div v-show="showTitleCard" class="initial-view clickable" @click="onSelectEdit">
+    <div v-show="showTitleCard" class="initial-view clickable" @click="onSelectEdit" tabindex="0">
       <div class="title">{{selected}}</div>
       <div class="bottom">
         <div class="subtitle">€/Month</div>
@@ -80,35 +80,61 @@ export default {
       startingPoint: null,
       movedBy: null,
       translate3dstart: 250,
+      maxPosition: null
     };
   },
   computed: {
     xPosition() {
-      return this.translate3dstart - this.movedBy
+      let pos = this.translate3dstart - this.movedBy
+      if(pos > 250) {
+        pos = 250
+      }
+      if(pos < this.maxPosition) {
+        pos = this.maxPosition
+      }
+      return pos
     }
   },
   mounted() {
     this.getStartingPosition()
+    this.getMaxPosition()
   },
   methods: {
     onDragStart(e) {
       this.isMouseDown = true
       this.startingPoint = e.clientX
-      console.log("mouse down", e.clientX)
+      // console.log("mouse down", e.clientX)
     },
     onDrag(e) {
       // e.preventDefault();
       if(this.isMouseDown) {
         this.movedBy = this.startingPoint - e.clientX
-        console.log("dragging x", e.clientX, this.movedBy)
+        // console.log("dragging x", e.clientX, this.movedBy)
       }
     },
-    onDragStop(e) {
+    onDragStop() {
       // only works when mouse is put up withing bounds of the slider
       this.isMouseDown = false
       this.translate3dstart = this.translate3dstart - this.movedBy
+
+      
+      const posMod = this.translate3dstart % 50
+
+      console.log(this.translate3dstart, posMod, posMod < 5, 3 < 5)
+      if((this.translate3dstart % 50) < 5) {
+        if((this.translate3dstart - posMod) % 100 === 0) {
+          this.translate3dstart = this.translate3dstart - posMod - 50
+        } else {
+          this.translate3dstart = this.translate3dstart - posMod
+        }
+      }
+
+      if(this.translate3dstart > 250) this.translate3dstart = 250
+      // set value to the closest position of center of single element
+      // set new style to new selected element
+      // change native select value accordingly
       this.movedBy = 0
-      console.log("mouse up", e)
+      // console.log("mouse up", e)
     },
     onSelect() {
       this.$emit("select", this.selected);
@@ -116,7 +142,16 @@ export default {
     onSelectEdit() {
       this.showTitleCard = false;
       this.showSelect = true;
-      console.log("editing...");
+      // console.log("editing...");
+    },
+    getMaxPosition() {
+      let index = this.elements.length - 1
+      let pos = 250
+      while(index) {
+        pos = pos - 100
+        index--
+      }
+      this.maxPosition = pos
     },
     getStartingPosition() {
       let index = this.elements.indexOf(this.default)
