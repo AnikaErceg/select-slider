@@ -16,15 +16,18 @@
         <div class="top-text">{{topText}}</div>
         <div class="center-options">
           <!-- 
-            for demo purposes, beginning point is hardcoded
+            for demo purposes, beginning point is hardcoded;
             for more bulletproof solution, beginning point should be calculated
             acording to parent width
 
             in this case, every next element is -100px from the previous one
             since elementa are positioned center in a box that's 100px wide
            -->
-          <div class="options" style="transform: translate3d(250px, 0px, 0px);" @mousedown="onDragStart" @mousemove="onDrag" @mouseup="onDragStop">
-            <div :class="{option: true, 'default-selected': element === selected}" v-for="element in elements" :key="element">{{ element }}</div>
+          <div class="options" :style="`transform: translate3d(${xPosition}px, 0px, 0px)`" @mousedown="onDragStart" @mousemove="onDrag" @mouseup="onDragStop">
+            <div v-for="(element, index) in elements"
+              :key="element"
+              :data-index="index"
+              :class="{option: true, 'default-selected': element === selected}">{{ element }}</div>
           </div>
         </div>
         <div class="bottom-text">{{bottomText}}</div>
@@ -74,20 +77,34 @@ export default {
       showTitleCard: true,
       showSelect: false,
       isMouseDown: false,
+      startingPoint: null,
+      movedBy: null,
+      translate3dstart: 250,
     };
+  },
+  computed: {
+    xPosition() {
+      return this.translate3dstart - this.movedBy
+    }
   },
   methods: {
     onDragStart(e) {
       this.isMouseDown = true
-      console.log("mouse down", e)
+      this.startingPoint = e.clientX
+      console.log("mouse down", e.clientX)
     },
     onDrag(e) {
+      // e.preventDefault();
       if(this.isMouseDown) {
-        console.log("dragging", e)
+        this.movedBy = this.startingPoint - e.clientX
+        console.log("dragging x", e.clientX, this.movedBy)
       }
     },
     onDragStop(e) {
+      // only works when mouse is put up withing bounds of the slider
       this.isMouseDown = false
+      this.translate3dstart = this.translate3dstart - this.movedBy
+      this.movedBy = 0
       console.log("mouse up", e)
     },
     onSelect() {
