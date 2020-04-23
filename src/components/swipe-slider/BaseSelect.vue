@@ -17,7 +17,7 @@
     </div>
 
     <div v-show="showSelect">
-      <div class="select-options">
+      <div class="select-options" tabindex="0" @keypress="keyPress" @keydown="keyPress">
         <div class="top-text"><span v-show="currentSelected === selected">{{topText}}</span></div>
         <div class="center-options">
           <!-- 
@@ -162,9 +162,18 @@ export default {
       this.$emit("select", this.currentSelected);
     },
     keyPress(e) {
-      if(e.key == "Enter") {
+      console.log(e.key)
+      if(e.key === "Enter") {
         this.showTitleCard = false;
         this.showSelect = true;
+      }
+      if (e.key === "ArrowRight") {
+        this.translate3dstart = this.translate3dstart - 100
+        this.getCurrentPositionIndex(this.translate3dstart)
+      }
+      if (e.key === "ArrowLeft") {
+        this.translate3dstart = this.translate3dstart + 100 
+        this.getCurrentPositionIndex(this.translate3dstart)
       }
     },
     onElemenyClick(i) {

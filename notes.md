@@ -5,9 +5,9 @@
 
 - Tab support (W3 requirement)
 
-Let use tab to the wrapper element, but don't let user in to avoid user having to tab who knows how many times to get out of the slider.
-
-Instead, when tab focus is detected on input, display two new buttons bellow the wrapper that user can use to navigate to element they desire
+User tabs into the element, presses enter
+Then tabs again into the element
+And can use arrow keys to go left and right
 
 
 - color configuration
