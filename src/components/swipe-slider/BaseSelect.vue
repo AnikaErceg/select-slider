@@ -87,6 +87,9 @@ export default {
       return this.translate3dstart - this.movedBy
     }
   },
+  mounted() {
+    this.getStartingPosition()
+  },
   methods: {
     onDragStart(e) {
       this.isMouseDown = true
@@ -114,6 +117,15 @@ export default {
       this.showTitleCard = false;
       this.showSelect = true;
       console.log("editing...");
+    },
+    getStartingPosition() {
+      let index = this.elements.indexOf(this.default)
+      let pos = 250
+      while(index) {
+        pos = pos - 100
+        index--
+      }
+      this.translate3dstart = pos
     }
   }
 };
