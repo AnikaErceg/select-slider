@@ -117,20 +117,28 @@ export default {
       this.isMouseDown = false
       this.translate3dstart = this.translate3dstart - this.movedBy
 
-      
+      if(this.translate3dstart > 250) this.translate3dstart = 250   
+
       const posMod = this.translate3dstart % 50
 
-      console.log(this.translate3dstart, posMod, posMod < 5, 3 < 5)
-      if((this.translate3dstart % 50) < 5) {
+      // snapping to center of element
+      // currently, for sake of demo, assums that the step between element centers is 100px
+      if((this.translate3dstart % 50) < 5 && this.translate3dstart < 0) {
         if((this.translate3dstart - posMod) % 100 === 0) {
           this.translate3dstart = this.translate3dstart - posMod - 50
         } else {
           this.translate3dstart = this.translate3dstart - posMod
         }
+      } else { // in case translate3D x is bigger than 0
+        const temp = Math.round(this.translate3dstart / 50)
+        if(temp % 2 === 0) {
+          this.translate3dstart = 50 * (temp+1)
+        } else {
+          this.translate3dstart = 50 * temp
+        }
       }
 
-      if(this.translate3dstart > 250) this.translate3dstart = 250
-      // set value to the closest position of center of single element
+      
       // set new style to new selected element
       // change native select value accordingly
       this.movedBy = 0
