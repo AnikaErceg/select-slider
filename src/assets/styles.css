@@ -71,6 +71,8 @@ body {
 .select-wrapper .top-text {
     font-size: .875rem;
     text-align: center;
+    height: 20px;
+    color: #EF767A;
 }
 
 .select-options {
@@ -93,6 +95,6 @@ body {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
 }
-.select-options .default-selected {
+.select-options .current-selected {
     color: #EF767A;
 }

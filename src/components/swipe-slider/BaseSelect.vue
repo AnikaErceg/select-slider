@@ -1,9 +1,14 @@
 <template>
   <div class="select-wrapper">
-    <select :name="name" v-model="selected" @change="onSelect">
+    <select :name="name" v-model="currentSelected" v-show="false">
       <option v-for="element in elements" :key="element">{{ element }}</option>
     </select>
-    <div v-show="showTitleCard" class="initial-view clickable" @click="onSelectEdit" tabindex="0">
+    <div v-show="showTitleCard"
+        class="initial-view clickable"
+        @click="onSelectEdit"
+        tabindex="0"
+        @keypress="keyPress"
+    >
       <div class="title">{{selected}}</div>
       <div class="bottom">
         <div class="subtitle">€/Month</div>
@@ -13,7 +18,7 @@
 
     <div v-show="showSelect">
       <div class="select-options">
-        <div class="top-text">{{topText}}</div>
+        <div class="top-text"><span v-show="currentSelected === selected">{{topText}}</span></div>
         <div class="center-options">
           <!-- 
             for demo purposes, beginning point is hardcoded;
@@ -23,11 +28,19 @@
             in this case, every next element is -100px from the previous one
             since elementa are positioned center in a box that's 100px wide
            -->
-          <div class="options" :style="`transform: translate3d(${xPosition}px, 0px, 0px)`" @mousedown="onDragStart" @mousemove="onDrag" @mouseup="onDragStop">
+          <div class="options" :style="`transform: translate3d(${xPosition}px, 0px, 0px)`"
+                @mousedown="onDragStart" @mousemove="onDrag" @mouseup="onDragStop"
+          >
             <div v-for="(element, index) in elements"
               :key="element"
               :data-index="index"
-              :class="{option: true, 'default-selected': element === selected}">{{ element }}</div>
+              @click="onElemenyClick(index)"
+              :class="{
+                option: true,
+                'default-selected': element === selected,
+                'current-selected': element === currentSelected}">
+                {{ element }}
+            </div>
           </div>
         </div>
         <div class="bottom-text">{{bottomText}}</div>
@@ -80,7 +93,8 @@ export default {
       startingPoint: null,
       movedBy: null,
       translate3dstart: 250,
-      maxPosition: null
+      maxPosition: null,
+      currentSelected: this.default
     };
   },
   computed: {
@@ -138,19 +152,38 @@ export default {
         }
       }
 
+      this.getCurrentPositionIndex(this.translate3dstart)
       
       // set new style to new selected element
       // change native select value accordingly
       this.movedBy = 0
+
       // console.log("mouse up", e)
+      this.$emit("select", this.currentSelected);
     },
-    onSelect() {
-      this.$emit("select", this.selected);
+    keyPress(e) {
+      if(e.key == "Enter") {
+        this.showTitleCard = false;
+        this.showSelect = true;
+      }
+    },
+    onElemenyClick(i) {
+      this.translate3dstart = 250 - i*100
+      this.getCurrentPositionIndex(this.translate3dstart)
     },
     onSelectEdit() {
       this.showTitleCard = false;
       this.showSelect = true;
       // console.log("editing...");
+    },
+    getCurrentPositionIndex(pos) {
+      let index = 0
+      let temp = 250
+      while(pos !== temp) {
+        temp = temp - 100
+        index = index + 1
+      }
+      this.currentSelected = this.elements[index]
     },
     getMaxPosition() {
       let index = this.elements.length - 1
