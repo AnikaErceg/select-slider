@@ -72,3 +72,22 @@ body {
     font-size: .875rem;
     text-align: center;
 }
+
+.select-options {
+    background-color: #fff;
+}
+.select-options .options {
+    display: flex;
+}
+.select-options .center-options {
+    overflow: hidden;
+}
+.select-options .options .option {
+    font-size: 2.5rem;
+    min-width: 100px;
+    cursor: pointer;
+    text-align: center;
+}
+.select-options .default-selected {
+    color: #EF767A;
+}
