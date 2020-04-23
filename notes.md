@@ -12,7 +12,7 @@ And can use arrow keys to go left and right
 
 - color configuration
 
-Allow color configuration with css styles through props
+can be achieved with overwriting css
 
 - message configuration
 
@@ -21,6 +21,7 @@ allow configuration for custom message for default element
 - elements to display
 
 allow for passing of elements and configuration for array with object elements
+NB! Due short time given, for demo purposes, component only accepts flat arrays
 
 - default element
 

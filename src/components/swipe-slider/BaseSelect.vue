@@ -159,7 +159,6 @@ export default {
       this.movedBy = 0
 
       // console.log("mouse up", e)
-      this.$emit("select", this.currentSelected);
     },
     keyPress(e) {
       console.log(e.key)
@@ -193,6 +192,7 @@ export default {
         index = index + 1
       }
       this.currentSelected = this.elements[index]
+      this.$emit("select", this.currentSelected);
     },
     getMaxPosition() {
       let index = this.elements.length - 1
