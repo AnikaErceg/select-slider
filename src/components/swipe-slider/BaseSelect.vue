@@ -119,13 +119,10 @@ export default {
       setTimeout(() => {
         this.isMouseDown = true
       }, 50);
-      // console.log("mouse down", e.clientX)
     },
     onDrag(e) {
-      // e.preventDefault();
       if(this.isMouseDown) {
         this.movedBy = this.startingPoint - e.clientX
-        // console.log("dragging x", e.clientX, this.movedBy)
       }
     },
     onDragStop() {
@@ -133,30 +130,9 @@ export default {
 
       if(this.translate3dstart > 250) this.translate3dstart = 250   
 
-      //const posMod = this.translate3dstart % 50
-
       // snapping to center of element
       // currently, for sake of demo, assums that the step between element centers is 100px
-
-      // if((this.translate3dstart % 50) < 5 && this.translate3dstart < 0) {
-      //   console.log(this.translate3dstart, posMod)
-      //   if((this.translate3dstart - posMod) % 100 === 0) {
-      //     this.translate3dstart = this.translate3dstart - posMod - 50
-      //   } else {
-      //     this.translate3dstart = this.translate3dstart - posMod
-      //   }
-      // } else if (this.translate3dstart >= 0) { // in case translate3D x is bigger than 0
-      //   const temp = Math.round(this.translate3dstart / 50)
-      //   if(temp % 2 === 0) {
-      //     this.translate3dstart = 50 * (temp+1)
-      //   } else {
-      //     this.translate3dstart = 50 * temp
-      //   }
-      // }
-
-
-      // round number to nearest 100 and add 50
-
+      // round number to nearest 100 and add 50 
       this.translate3dstart = Math.floor(this.translate3dstart/100)*100 + 50
 
       this.getCurrentPositionIndex(this.translate3dstart)
@@ -164,13 +140,10 @@ export default {
       // set new style to new selected element
       // change native select value accordingly
       this.movedBy = 0
-      console.log("drag stop")
      
       this.isMouseDown = false
-      // console.log("mouse up", e)
     },
     keyPress(e) {
-      console.log(e.key)
       if(e.key === "Enter") {
         this.showTitleCard = false;
         this.showSelect = true;
@@ -185,7 +158,8 @@ export default {
       }
     },
     onElemenyClick(i) {
-      console.log("i'm triggered!!", i)
+      // events bubbled
+      // traditional solutions I tried, didn't give desired effect
       if (!document.querySelector('.dragging')) {
         this.translate3dstart = 250 - i*100
         this.getCurrentPositionIndex(this.translate3dstart)
@@ -194,7 +168,6 @@ export default {
     onSelectEdit() {
       this.showTitleCard = false;
       this.showSelect = true;
-      // console.log("editing...");
     },
     getCurrentPositionIndex(pos) {
       let index = 0
