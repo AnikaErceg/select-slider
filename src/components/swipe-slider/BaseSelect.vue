@@ -79,9 +79,6 @@ export default {
     default: {
       type: String
     },
-    classes: {
-      type: Object
-    }
   },
   data() {
     return {
